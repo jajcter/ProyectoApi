@@ -27,6 +27,7 @@ namespace ApiTienda.Models
         public string categoria { get; set; }
         public string detalle { get; set; }
         public string estado { get; set; }
+
         public Nullable<int> idUsuarioDueño { get; set; }
     
         public virtual Usuario Usuario { get; set; }

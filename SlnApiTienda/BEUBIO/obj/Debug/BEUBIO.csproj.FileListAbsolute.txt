@@ -1,0 +1,12 @@
+C:\Users\manot\Documents\ES 6TO 2\cetificacion 1\UNIDAD 2\ProyectoApi\SlnApiTienda\BEUBIO\bin\Debug\BEUBIO.dll.config
+C:\Users\manot\Documents\ES 6TO 2\cetificacion 1\UNIDAD 2\ProyectoApi\SlnApiTienda\BEUBIO\bin\Debug\BEUBIO.dll
+C:\Users\manot\Documents\ES 6TO 2\cetificacion 1\UNIDAD 2\ProyectoApi\SlnApiTienda\BEUBIO\bin\Debug\BEUBIO.pdb
+C:\Users\manot\Documents\ES 6TO 2\cetificacion 1\UNIDAD 2\ProyectoApi\SlnApiTienda\BEUBIO\bin\Debug\EntityFramework.dll
+C:\Users\manot\Documents\ES 6TO 2\cetificacion 1\UNIDAD 2\ProyectoApi\SlnApiTienda\BEUBIO\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\manot\Documents\ES 6TO 2\cetificacion 1\UNIDAD 2\ProyectoApi\SlnApiTienda\BEUBIO\bin\Debug\EntityFramework.xml
+C:\Users\manot\Documents\ES 6TO 2\cetificacion 1\UNIDAD 2\ProyectoApi\SlnApiTienda\BEUBIO\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\manot\Documents\ES 6TO 2\cetificacion 1\UNIDAD 2\ProyectoApi\SlnApiTienda\BEUBIO\obj\Debug\BEUBIO.csprojAssemblyReference.cache
+C:\Users\manot\Documents\ES 6TO 2\cetificacion 1\UNIDAD 2\ProyectoApi\SlnApiTienda\BEUBIO\obj\Debug\BEUBIO.csproj.CoreCompileInputs.cache
+C:\Users\manot\Documents\ES 6TO 2\cetificacion 1\UNIDAD 2\ProyectoApi\SlnApiTienda\BEUBIO\obj\Debug\BEUBIO.csproj.CopyComplete
+C:\Users\manot\Documents\ES 6TO 2\cetificacion 1\UNIDAD 2\ProyectoApi\SlnApiTienda\BEUBIO\obj\Debug\BEUBIO.dll
+C:\Users\manot\Documents\ES 6TO 2\cetificacion 1\UNIDAD 2\ProyectoApi\SlnApiTienda\BEUBIO\obj\Debug\BEUBIO.pdb
