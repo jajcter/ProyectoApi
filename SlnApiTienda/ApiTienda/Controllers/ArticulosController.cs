@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
@@ -17,14 +11,15 @@ namespace ApiTienda.Controllers
 {
     public class ArticulosController : ApiController
     {
-        [EnableCors(origins: "https://localhost:4200/", headers: "*", methods: "*")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
 
         // GET: api/Articulos
-        public IHttpActionResult Get()
+        [ResponseType(typeof(Articulo))]
+        public IHttpActionResult Get(string criterio)
         {
             try
             {
-                List<Articulo> todos = ArticuloBLL.GetList();
+                List<Articulo> todos = ArticuloBLL.GetList(criterio);
                 return Content(HttpStatusCode.OK, todos);
             }
             catch (Exception ex)

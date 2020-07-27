@@ -90,7 +90,7 @@ namespace BEUBIO.Transaction
         }
          */
 
-        public static List<Articulo> GetList()
+        public static List<Articulo> GetList(string criterio)
         {
             Entities_Bio db = new Entities_Bio();
             //Instancia del contexto
@@ -106,8 +106,8 @@ namespace BEUBIO.Transaction
             //SQL -> SELECT * FROM dbo.Alumno WHERE sexo = 'M'
             //return db.Alumnoes.Where(x => x.sexo == "M").ToList();
 
-            //return db.Articuloes.Where(x => x.nombre.ToLower().Contains(criterio)).ToList();
-            return db.Articuloes.ToList();
+            return db.Articuloes.Where(x => x.categoria.ToLower().Contains(criterio)).ToList();
+            //return db.Articuloes.ToList();
 
             //Los metodos del EntityFramework se denomina Linq, 
             //y la evluacion de condiciones lambda

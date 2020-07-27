@@ -9,6 +9,7 @@
 
 namespace BEUBIO
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -19,8 +20,10 @@ namespace BEUBIO
         public Nullable<int> idUsuarioComprador { get; set; }
         public Nullable<int> idNegocio { get; set; }
         public Nullable<decimal> total { get; set; }
-    
+
+        [JsonIgnore]
         public virtual Negocio Negocio { get; set; }
+        [JsonIgnore]
         public virtual Usuario Usuario { get; set; }
     }
 }

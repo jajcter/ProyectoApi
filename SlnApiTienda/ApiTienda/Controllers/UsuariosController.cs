@@ -17,7 +17,7 @@ namespace ApiTienda.Controllers
 {
     public class UsuariosController : ApiController
     {
-        [EnableCors(origins: "https://localhost:4200/", headers: "*", methods: "*")]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
 
         // GET: api/Articulos
         public IHttpActionResult Get()
@@ -59,6 +59,7 @@ namespace ApiTienda.Controllers
         {
             try
             {
+                Console.Write("Hola Mundo");
                 UsuarioBLL.Create(Usuario);
                 return Content(HttpStatusCode.Created, "Usuario creado correctamente");
             }

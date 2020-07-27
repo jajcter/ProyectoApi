@@ -10,6 +10,8 @@ namespace ApiTienda
     {
         public static void Register(HttpConfiguration config)
         {
+            var formatter = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
+            formatter.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
             // Configuración y servicios de API web
             config.EnableCors();
 
@@ -21,7 +23,7 @@ namespace ApiTienda
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+            
         }
     }
 }
