@@ -56,9 +56,6 @@
     <Compile Include="Articulo.cs">
       <DependentUpon>Modelo_eC_Bio.tt</DependentUpon>
     </Compile>
-    <Compile Include="Imagen.cs">
-      <DependentUpon>Modelo_eC_Bio.tt</DependentUpon>
-    </Compile>
     <Compile Include="Modelo_eC_Bio.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -79,7 +76,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transaction\ArticuloBLL.cs" />
-    <Compile Include="Transaction\ImagenBLL.cs" />
     <Compile Include="Transaction\NegocioBLL.cs" />
     <Compile Include="Transaction\UsuarioBLL.cs" />
     <Compile Include="Transaction\VentaBLL.cs" />
@@ -114,6 +110,7 @@
       <DependentUpon>Modelo_eC_Bio.edmx</DependentUpon>
       <LastGenOutput>Modelo_eC_Bio.cs</LastGenOutput>
     </Content>
+    <Content Include="ScriptDBBIO.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -121,7 +121,7 @@ namespace BEUBIO.Transaction
                 result.Add(
                     new Venta
                     {
-                        idUsuarioComprador = x.idUsuarioComprador
+                        idUsuario = x.idUsuario
                     }));
             return result;
         }

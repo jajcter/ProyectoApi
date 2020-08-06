@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Modelo_Bio.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Modelo_Bio.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Articulo">
           <Key>
             <PropertyRef Name="idArticulo" />
@@ -15,15 +15,9 @@
           <Property Name="categoria" Type="varchar" MaxLength="25" />
           <Property Name="detalle" Type="varchar(max)" />
           <Property Name="estado" Type="varchar" MaxLength="12" />
-          <Property Name="idUsuarioDueño" Type="int" />
-        </EntityType>
-        <EntityType Name="Imagen">
-          <Key>
-            <PropertyRef Name="idImagen" />
-          </Key>
-          <Property Name="idImagen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="imagenBin" Type="varbinary(max)" />
-          <Property Name="idArticulo" Type="int" />
+          <Property Name="idUsuario" Type="int" />
+          <Property Name="imgPortada" Type="varchar(max)" />
+          <Property Name="estadoStock" Type="nchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="Negocio">
           <Key>
@@ -45,6 +39,8 @@
           <Property Name="direccion" Type="varchar" MaxLength="100" />
           <Property Name="telefono" Type="nchar" MaxLength="16" />
           <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="estado" Type="nchar" MaxLength="1" />
+          <Property Name="contrasena" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Venta">
           <Key>
@@ -52,7 +48,7 @@
           </Key>
           <Property Name="idVenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fechaVenta" Type="datetime" />
-          <Property Name="idUsuarioComprador" Type="int" />
+          <Property Name="idUsuario" Type="int" />
           <Property Name="idNegocio" Type="int" />
           <Property Name="total" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
@@ -64,19 +60,7 @@
               <PropertyRef Name="idUsuario" />
             </Principal>
             <Dependent Role="Articulo">
-              <PropertyRef Name="idUsuarioDueño" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Imagen_Articulo">
-          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
-          <End Role="Imagen" Type="Self.Imagen" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Articulo">
-              <PropertyRef Name="idArticulo" />
-            </Principal>
-            <Dependent Role="Imagen">
-              <PropertyRef Name="idArticulo" />
+              <PropertyRef Name="idUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -112,23 +96,18 @@
               <PropertyRef Name="idUsuario" />
             </Principal>
             <Dependent Role="Venta">
-              <PropertyRef Name="idUsuarioComprador" />
+              <PropertyRef Name="idUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Modelo_BioStoreContainer">
           <EntitySet Name="Articulo" EntityType="Self.Articulo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Imagen" EntityType="Self.Imagen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Negocio" EntityType="Self.Negocio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Articulo_Usuario" Association="Self.FK_Articulo_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Articulo" EntitySet="Articulo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Imagen_Articulo" Association="Self.FK_Imagen_Articulo">
-            <End Role="Articulo" EntitySet="Articulo" />
-            <End Role="Imagen" EntitySet="Imagen" />
           </AssociationSet>
           <AssociationSet Name="FK_Negocio_Articulo" Association="Self.FK_Negocio_Articulo">
             <End Role="Articulo" EntitySet="Articulo" />
@@ -143,8 +122,7 @@
             <End Role="Venta" EntitySet="Venta" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Modelo_Bio" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -158,19 +136,11 @@
           <Property Name="categoria" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="detalle" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="idUsuarioDueño" Type="Int32" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Articulo_Usuario" FromRole="Articulo" ToRole="Usuario" />
-          <NavigationProperty Name="Imagens" Relationship="Self.FK_Imagen_Articulo" FromRole="Articulo" ToRole="Imagen" />
           <NavigationProperty Name="Negocios" Relationship="Self.FK_Negocio_Articulo" FromRole="Articulo" ToRole="Negocio" />
-        </EntityType>
-        <EntityType Name="Imagen">
-          <Key>
-            <PropertyRef Name="idImagen" />
-          </Key>
-          <Property Name="idImagen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="imagenBin" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="idArticulo" Type="Int32" />
-          <NavigationProperty Name="Articulo" Relationship="Self.FK_Imagen_Articulo" FromRole="Imagen" ToRole="Articulo" />
+          <Property Name="imgPortada" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="estadoStock" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="idUsuario" Type="Int32" />
+          <NavigationProperty Name="Usuario1" Relationship="Modelo_Bio.FK_Articulo_Usuario1" FromRole="Articulo" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Negocio">
           <Key>
@@ -194,8 +164,10 @@
           <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="telefono" Type="String" MaxLength="16" FixedLength="true" Unicode="true" />
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Articuloes" Relationship="Self.FK_Articulo_Usuario" FromRole="Usuario" ToRole="Articulo" />
-          <NavigationProperty Name="Ventas" Relationship="Self.FK_Venta_Usuario" FromRole="Usuario" ToRole="Venta" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="contrasena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Articuloes1" Relationship="Modelo_Bio.FK_Articulo_Usuario1" FromRole="Usuario" ToRole="Articulo" />
+          <NavigationProperty Name="Ventas1" Relationship="Modelo_Bio.FK_Venta_Usuario1" FromRole="Usuario" ToRole="Venta" />
         </EntityType>
         <EntityType Name="Venta">
           <Key>
@@ -203,36 +175,12 @@
           </Key>
           <Property Name="idVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="fechaVenta" Type="DateTime" Precision="3" />
-          <Property Name="idUsuarioComprador" Type="Int32" />
           <Property Name="idNegocio" Type="Int32" />
           <Property Name="total" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="Negocio" Relationship="Self.FK_Venta_Negocio" FromRole="Venta" ToRole="Negocio" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Venta_Usuario" FromRole="Venta" ToRole="Usuario" />
+          <Property Name="idUsuario" Type="Int32" />
+          <NavigationProperty Name="Usuario1" Relationship="Modelo_Bio.FK_Venta_Usuario1" FromRole="Venta" ToRole="Usuario" />
         </EntityType>
-        <Association Name="FK_Articulo_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="idUsuario" />
-            </Principal>
-            <Dependent Role="Articulo">
-              <PropertyRef Name="idUsuarioDueño" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Imagen_Articulo">
-          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
-          <End Role="Imagen" Type="Self.Imagen" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Articulo">
-              <PropertyRef Name="idArticulo" />
-            </Principal>
-            <Dependent Role="Imagen">
-              <PropertyRef Name="idArticulo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Negocio_Articulo">
           <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
           <End Role="Negocio" Type="Self.Negocio" Multiplicity="*" />
@@ -257,32 +205,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Venta_Usuario">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-          <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="idUsuario" />
-            </Principal>
-            <Dependent Role="Venta">
-              <PropertyRef Name="idUsuarioComprador" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Entities_Bio" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Articuloes" EntityType="Self.Articulo" />
-          <EntitySet Name="Imagens" EntityType="Self.Imagen" />
           <EntitySet Name="Negocios" EntityType="Self.Negocio" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
           <EntitySet Name="Ventas" EntityType="Self.Venta" />
-          <AssociationSet Name="FK_Articulo_Usuario" Association="Self.FK_Articulo_Usuario">
-            <End Role="Usuario" EntitySet="Usuarios" />
-            <End Role="Articulo" EntitySet="Articuloes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Imagen_Articulo" Association="Self.FK_Imagen_Articulo">
-            <End Role="Articulo" EntitySet="Articuloes" />
-            <End Role="Imagen" EntitySet="Imagens" />
-          </AssociationSet>
           <AssociationSet Name="FK_Negocio_Articulo" Association="Self.FK_Negocio_Articulo">
             <End Role="Articulo" EntitySet="Articuloes" />
             <End Role="Negocio" EntitySet="Negocios" />
@@ -291,11 +218,39 @@
             <End Role="Negocio" EntitySet="Negocios" />
             <End Role="Venta" EntitySet="Ventas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Venta_Usuario" Association="Self.FK_Venta_Usuario">
-            <End Role="Usuario" EntitySet="Usuarios" />
-            <End Role="Venta" EntitySet="Ventas" />
+          <AssociationSet Name="FK_Articulo_Usuario1" Association="Modelo_Bio.FK_Articulo_Usuario1">
+            <End EntitySet="Usuarios" Role="Usuario" />
+            <End EntitySet="Articuloes" Role="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Venta_Usuario1" Association="Modelo_Bio.FK_Venta_Usuario1">
+            <End EntitySet="Usuarios" Role="Usuario" />
+            <End EntitySet="Ventas" Role="Venta" />
           </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Articulo_Usuario1">
+          <End Type="Modelo_Bio.Usuario" Multiplicity="0..1" Role="Usuario" />
+          <End Type="Modelo_Bio.Articulo" Multiplicity="*" Role="Articulo" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Venta_Usuario1">
+          <End Type="Modelo_Bio.Usuario" Multiplicity="0..1" Role="Usuario" />
+          <End Type="Modelo_Bio.Venta" Multiplicity="*" Role="Venta" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -305,22 +260,15 @@
           <EntitySetMapping Name="Articuloes">
             <EntityTypeMapping TypeName="Modelo_Bio.Articulo">
               <MappingFragment StoreEntitySet="Articulo">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="estadoStock" ColumnName="estadoStock" />
+                <ScalarProperty Name="imgPortada" ColumnName="imgPortada" />
                 <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="precio" ColumnName="precio" />
                 <ScalarProperty Name="categoria" ColumnName="categoria" />
                 <ScalarProperty Name="detalle" ColumnName="detalle" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="idUsuarioDueño" ColumnName="idUsuarioDueño" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Imagens">
-            <EntityTypeMapping TypeName="Modelo_Bio.Imagen">
-              <MappingFragment StoreEntitySet="Imagen">
-                <ScalarProperty Name="idImagen" ColumnName="idImagen" />
-                <ScalarProperty Name="imagenBin" ColumnName="imagenBin" />
-                <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -338,6 +286,8 @@
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="Modelo_Bio.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="nombres" ColumnName="nombres" />
                 <ScalarProperty Name="apellidos" ColumnName="apellidos" />
@@ -350,9 +300,9 @@
           <EntitySetMapping Name="Ventas">
             <EntityTypeMapping TypeName="Modelo_Bio.Venta">
               <MappingFragment StoreEntitySet="Venta">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="idVenta" ColumnName="idVenta" />
                 <ScalarProperty Name="fechaVenta" ColumnName="fechaVenta" />
-                <ScalarProperty Name="idUsuarioComprador" ColumnName="idUsuarioComprador" />
                 <ScalarProperty Name="idNegocio" ColumnName="idNegocio" />
                 <ScalarProperty Name="total" ColumnName="total" />
               </MappingFragment>

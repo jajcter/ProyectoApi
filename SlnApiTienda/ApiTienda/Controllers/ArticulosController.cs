@@ -47,6 +47,24 @@ namespace ApiTienda.Controllers
             }
         }
 
+        
+        public IHttpActionResult Get(int id, string dato)
+        {
+            try
+            {
+                List<Articulo> result = ArticuloBLL.Get_id(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Content(HttpStatusCode.OK, result);
+            }
+            catch (Exception ex)
+            {
+                return Content(HttpStatusCode.BadRequest, ex);
+            }
+        }
+
         //// PUT: api/Articulos/5
         //[ResponseType(typeof(void))]
         //public async Task<IHttpActionResult> PutArticulo(int id, Articulo articulo)
@@ -85,7 +103,7 @@ namespace ApiTienda.Controllers
 
 
 
-        
+
 
         // POST: api/Articulos
         [ResponseType(typeof(Articulo))]
@@ -95,6 +113,20 @@ namespace ApiTienda.Controllers
             {
                 ArticuloBLL.Create(articulo);
                 return Content(HttpStatusCode.Created, "Artículo creado correctamente");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        public IHttpActionResult Put(Articulo articulo)
+        {
+            try
+            {
+                ArticuloBLL.Update(articulo);
+                return Content(HttpStatusCode.OK, "Usuario actualizado correctamente");
+
             }
             catch (Exception ex)
             {

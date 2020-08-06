@@ -10,15 +10,9 @@
     <Property Name="categoria" Type="varchar" MaxLength="25" />
     <Property Name="detalle" Type="varchar(max)" />
     <Property Name="estado" Type="varchar" MaxLength="12" />
-    <Property Name="idUsuarioDueño" Type="int" />
-  </EntityType>
-  <EntityType Name="Imagen">
-    <Key>
-      <PropertyRef Name="idImagen" />
-    </Key>
-    <Property Name="idImagen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="imagenBin" Type="varbinary(max)" />
-    <Property Name="idArticulo" Type="int" />
+    <Property Name="idUsuario" Type="int" />
+    <Property Name="imgPortada" Type="varchar(max)" />
+    <Property Name="estadoStock" Type="nchar" MaxLength="1" />
   </EntityType>
   <EntityType Name="Negocio">
     <Key>
@@ -40,6 +34,8 @@
     <Property Name="direccion" Type="varchar" MaxLength="100" />
     <Property Name="telefono" Type="nchar" MaxLength="16" />
     <Property Name="email" Type="varchar" MaxLength="100" />
+    <Property Name="estado" Type="nchar" MaxLength="1" />
+    <Property Name="contrasena" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Venta">
     <Key>
@@ -47,7 +43,7 @@
     </Key>
     <Property Name="idVenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="fechaVenta" Type="datetime" />
-    <Property Name="idUsuarioComprador" Type="int" />
+    <Property Name="idUsuario" Type="int" />
     <Property Name="idNegocio" Type="int" />
     <Property Name="total" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
@@ -59,19 +55,7 @@
         <PropertyRef Name="idUsuario" />
       </Principal>
       <Dependent Role="Articulo">
-        <PropertyRef Name="idUsuarioDueño" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Imagen_Articulo">
-    <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
-    <End Role="Imagen" Type="Self.Imagen" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Articulo">
-        <PropertyRef Name="idArticulo" />
-      </Principal>
-      <Dependent Role="Imagen">
-        <PropertyRef Name="idArticulo" />
+        <PropertyRef Name="idUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -107,23 +91,18 @@
         <PropertyRef Name="idUsuario" />
       </Principal>
       <Dependent Role="Venta">
-        <PropertyRef Name="idUsuarioComprador" />
+        <PropertyRef Name="idUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="Modelo_BioStoreContainer">
     <EntitySet Name="Articulo" EntityType="Self.Articulo" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Imagen" EntityType="Self.Imagen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Negocio" EntityType="Self.Negocio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Articulo_Usuario" Association="Self.FK_Articulo_Usuario">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Articulo" EntitySet="Articulo" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Imagen_Articulo" Association="Self.FK_Imagen_Articulo">
-      <End Role="Articulo" EntitySet="Articulo" />
-      <End Role="Imagen" EntitySet="Imagen" />
     </AssociationSet>
     <AssociationSet Name="FK_Negocio_Articulo" Association="Self.FK_Negocio_Articulo">
       <End Role="Articulo" EntitySet="Articulo" />

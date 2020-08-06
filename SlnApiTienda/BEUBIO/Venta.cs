@@ -9,7 +9,6 @@
 
 namespace BEUBIO
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -17,13 +16,11 @@ namespace BEUBIO
     {
         public int idVenta { get; set; }
         public Nullable<System.DateTime> fechaVenta { get; set; }
-        public Nullable<int> idUsuarioComprador { get; set; }
         public Nullable<int> idNegocio { get; set; }
         public Nullable<decimal> total { get; set; }
-
-        [JsonIgnore]
+        public Nullable<int> idUsuario { get; set; }
+    
         public virtual Negocio Negocio { get; set; }
-        [JsonIgnore]
-        public virtual Usuario Usuario { get; set; }
+        public virtual Usuario Usuario1 { get; set; }
     }
 }

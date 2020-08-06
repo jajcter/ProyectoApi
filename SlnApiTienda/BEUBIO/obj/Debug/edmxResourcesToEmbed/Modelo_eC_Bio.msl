@@ -4,22 +4,15 @@
     <EntitySetMapping Name="Articuloes">
       <EntityTypeMapping TypeName="Modelo_Bio.Articulo">
         <MappingFragment StoreEntitySet="Articulo">
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="estadoStock" ColumnName="estadoStock" />
+          <ScalarProperty Name="imgPortada" ColumnName="imgPortada" />
           <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="precio" ColumnName="precio" />
           <ScalarProperty Name="categoria" ColumnName="categoria" />
           <ScalarProperty Name="detalle" ColumnName="detalle" />
           <ScalarProperty Name="estado" ColumnName="estado" />
-          <ScalarProperty Name="idUsuarioDueño" ColumnName="idUsuarioDueño" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Imagens">
-      <EntityTypeMapping TypeName="Modelo_Bio.Imagen">
-        <MappingFragment StoreEntitySet="Imagen">
-          <ScalarProperty Name="idImagen" ColumnName="idImagen" />
-          <ScalarProperty Name="imagenBin" ColumnName="imagenBin" />
-          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -37,6 +30,8 @@
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="Modelo_Bio.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
           <ScalarProperty Name="nombres" ColumnName="nombres" />
           <ScalarProperty Name="apellidos" ColumnName="apellidos" />
@@ -49,9 +44,9 @@
     <EntitySetMapping Name="Ventas">
       <EntityTypeMapping TypeName="Modelo_Bio.Venta">
         <MappingFragment StoreEntitySet="Venta">
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
           <ScalarProperty Name="idVenta" ColumnName="idVenta" />
           <ScalarProperty Name="fechaVenta" ColumnName="fechaVenta" />
-          <ScalarProperty Name="idUsuarioComprador" ColumnName="idUsuarioComprador" />
           <ScalarProperty Name="idNegocio" ColumnName="idNegocio" />
           <ScalarProperty Name="total" ColumnName="total" />
         </MappingFragment>

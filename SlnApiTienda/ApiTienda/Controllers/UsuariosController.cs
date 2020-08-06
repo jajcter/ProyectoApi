@@ -69,6 +69,20 @@ namespace ApiTienda.Controllers
             }
         }
 
+        public IHttpActionResult Put(Usuario usuario)
+        {
+            try
+            {
+                UsuarioBLL.Update(usuario);
+                return Content(HttpStatusCode.OK, "Usuario actualizado correctamente");
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         // DELETE: api/Articulos/5
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult Delete(int id)

@@ -9,7 +9,6 @@
 
 namespace BEUBIO
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -26,11 +25,9 @@ namespace BEUBIO
         public Nullable<decimal> precio { get; set; }
         public Nullable<decimal> subtotal { get; set; }
         public Nullable<int> idAriculo { get; set; }
-
-        [JsonIgnore]
+    
         public virtual Articulo Articulo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [JsonIgnore]
         public virtual ICollection<Venta> Ventas { get; set; }
     }
 }

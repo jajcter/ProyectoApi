@@ -38,6 +38,12 @@ namespace BEUBIO.Transaction
             return db.Articuloes.Find(id);
         }
 
+        public static List<Articulo> Get_id(int? id)
+        {
+            Entities_Bio db = new Entities_Bio();
+            return db.Articuloes.Where(x => x.idUsuario == id).ToList();
+        }
+
         public static void Update(Articulo articulo)
         {
             using (Entities_Bio db = new Entities_Bio())

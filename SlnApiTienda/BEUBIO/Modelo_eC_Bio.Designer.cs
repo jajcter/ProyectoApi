@@ -1,4 +1,4 @@
-﻿// La generación de código T4 está habilitada para el modelo 'C:\Users\manot\Documents\ES 6TO 2\cetificacion 1\UNIDAD 2\ProyectoApi\SlnApiTienda\BEUBIO\Modelo_eC_Bio.edmx'. 
+﻿// La generación de código T4 está habilitada para el modelo 'C:\Users\Steeven\source\repos\ProyectoApi\SlnApiTienda\BEUBIO\Modelo_eC_Bio.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.

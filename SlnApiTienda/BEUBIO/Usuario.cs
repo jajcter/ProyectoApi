@@ -9,7 +9,6 @@
 
 namespace BEUBIO
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -18,8 +17,8 @@ namespace BEUBIO
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
-            this.Articuloes = new HashSet<Articulo>();
-            this.Ventas = new HashSet<Venta>();
+            this.Articuloes1 = new HashSet<Articulo>();
+            this.Ventas1 = new HashSet<Venta>();
         }
     
         public int idUsuario { get; set; }
@@ -28,12 +27,12 @@ namespace BEUBIO
         public string direccion { get; set; }
         public string telefono { get; set; }
         public string email { get; set; }
-
-        [JsonIgnore]
+        public string estado { get; set; }
+        public string contrasena { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Articulo> Articuloes { get; set; }
-        [JsonIgnore]
+        public virtual ICollection<Articulo> Articuloes1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Venta> Ventas { get; set; }
+        public virtual ICollection<Venta> Ventas1 { get; set; }
     }
 }
